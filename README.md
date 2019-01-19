@@ -15,3 +15,14 @@ getNewTop
 前往位置scroll位置(Number)
 toTop 默认回到顶部
 
+上一次记录数组(Array)
+pre
+
+返回到上一次滚动位置
+wantToback
+
+回到实例时位置
+wantToNew
+
+
+

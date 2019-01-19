@@ -22,7 +22,7 @@
             overflow-x: hidden;
         }
         .ss{
-            height: 2000px;
+            height: 1999px;
             width: 10px;
         }
     </style>
@@ -37,29 +37,21 @@
     <script src="./scroll.js"></script>
     <script>
 
-        console.log(document.body.clientHeight )
-        console.log(document.getElementById('box').clientHeight )
-        console.log(document.getElementById('box').offsetHeight)
-        // console.log(window)
         let wantT = new betterScroll('#box',{
             speed:10
         })
         function get() {
-            // wantT.getHeight()
-            wantT.toTop(60000)
+            wantT.wantTo(Infinity)
 
         }
         function to() {
-            // wantT.getHeight()
-            wantT.toTop(2)
+            wantT.wantTo(2)
 
         }
         function tos() {
             console.log( wantT.elOrwind() )
 
         }
-        // wantT.toTop(1)
-        wantT.getScroll()
 
     </script>
 </body>

@@ -14,19 +14,35 @@ class betterScroll {
         else {
             this.el = document.getElementById(el.substr(1));
         }
-        this.demo = null;
-    }
-    wantTo() {
+        this.demo = null;   //主要对比是否已经到达极限值 中断事件的执行
+        this.swichs = true; //设置开关 禁止 在滚动事件中开启另一个事件
+        this.pre = [];      //上一次滚动位置
 
+    }
+    wantTo(wantTop) {
+        if (!this.swichs) return
+        this.swichs = false;
+        if (wantTop === 'top') { this.toTop(0); this.pre.push(0); }
+        else if (wantTop === 'bottom') { this.toTop(Infinity); this.pre.push(Infinity); }
+        else { this.toTop(wantTop); this.pre.push(wantTop) }
+    }
+    //返回到上一次滚动位置
+    wantToback() {
+        if (this.pre.length === 0) return
+        let i = this.pre.pop()
+        this.wantTo(i)
+    }
+    wantToNew() {
+        this.wantTo(this.getNewTop())
     }
     //移动功能函数
     goTop(top) {
-        if(this.demo === this.elOrwind()) {
+        if (this.demo === this.elOrwind()) {
             //控制随意输入 超出范围内部
             this.clear()
             return
         }
-        console.log(this.elOrwind())
+        // console.log(this.elOrwind())
         this.demo = this.elOrwind()
         this.el.scrollTo(0, top)
     }
@@ -44,6 +60,7 @@ class betterScroll {
         //移动位置过小 直接移动 中断
         if (Math.abs(wantTop - nowTops) <= 20) {
             this.goTop(wantTop)
+            this.swichs = true;
             return
         }
         //向下
@@ -54,7 +71,7 @@ class betterScroll {
                 nowTops += i > 19 ? i : ++i;
                 if (wantTop <= nowTops) {
                     this.clear()
-                    this.goTop(wantTop+20)
+                    this.goTop(wantTop + 20)
                     return
                 }
                 this.goTop(nowTops);
@@ -66,7 +83,7 @@ class betterScroll {
             wantTop = wantTop + 20
             window.timers = setInterval(() => {
                 nowTops -= i > 19 ? i : ++i;
-                console.log(i)
+                // console.log(i)
                 if (wantTop >= nowTops) {
                     this.clear()
                     this.goTop(wantTop - 20)
@@ -75,7 +92,7 @@ class betterScroll {
                 this.goTop(nowTops);
             }, this.timer)
         }
-        else { }
+        else { this.swichs = true; console.log('相等') }
     }
     //测试scrool的高度
     getScroll() {
@@ -83,11 +100,13 @@ class betterScroll {
     }
     //读取测试高度
     getHeight() {
+        return this.elOrwind()
         // console.log(this.elOrwind())
     }
     //读取实例时的高度
     getNewTop() {
-        console.log(this.top)
+        return this.top
+        // console.log(this.top)
     }
     //获取节点或window对象当前scroll高度
     elOrwind() {
@@ -97,6 +116,7 @@ class betterScroll {
     }
     //清除事件 释放内存
     clear() {
+        this.swichs = true;
         this.demo = null;
         clearInterval(window.timers);
         window.timers = null;
