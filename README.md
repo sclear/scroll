@@ -6,11 +6,11 @@ el {
     window or el
 }
 
-滚动读取scroll值
+测试 滚动读取scroll值
 getHeight
 
-读取当前高度
-getNowTop
+读取 记忆 实例时高度
+getNewTop
 
 前往位置scroll位置(Number)
 toTop 默认回到顶部
