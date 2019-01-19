@@ -6,7 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        *{
+            margin:0;
+            padding:0;
+        }
         body,html{
+
             /* height: 100%; */
             height: 2000px;
         }
@@ -26,20 +31,34 @@
     <div id="box">
         <div class="ss">1</div>
     </div>
-    <button onclick="get()"></button>
+    <button onclick="get()">to444444444</button>
+    <button onclick="to()">235345</button>
+    <button onclick="tos()">235345</button>
     <script src="./scroll.js"></script>
     <script>
 
-        console.log(window.screen.height)
+        console.log(document.body.clientHeight )
+        console.log(document.getElementById('box').clientHeight )
+        console.log(document.getElementById('box').offsetHeight)
         // console.log(window)
-        let wantT = new betterScroll(window,{
+        let wantT = new betterScroll('#box',{
             speed:10
         })
         function get() {
-            wantT.toTop(500)
+            // wantT.getHeight()
+            wantT.toTop(60000)
 
         }
-        wantT.toTop(500)
+        function to() {
+            // wantT.getHeight()
+            wantT.toTop(2)
+
+        }
+        function tos() {
+            console.log( wantT.elOrwind() )
+
+        }
+        // wantT.toTop(1)
         wantT.getScroll()
 
     </script>
