@@ -1,6 +1,10 @@
+滚动条前往任意位置( 容器空间内 )
+支持window对象 或者节点中的滚动
 
 构造函数中需要参数速度(Number)
-默认:10
+el {
+    window or el
+}
 
 滚动读取scroll值
 getHeight
