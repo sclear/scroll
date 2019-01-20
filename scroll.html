@@ -31,27 +31,43 @@
     <div id="box">
         <div class="ss">1</div>
     </div>
-    <button onclick="get()">to444444444</button>
-    <button onclick="to()">235345</button>
-    <button onclick="tos()">235345</button>
+    <button onclick="get()">Down</button>
+    <button onclick="to()">Up</button>
+    <button onclick="tos()">读取</button>
+    <button onclick="pre()">rpe</button>
     <script src="./scroll.js"></script>
     <script>
 
-        let wantT = new betterScroll('#box',{
+
+
+        let wantT = new wantScroll('#box',{
             speed:10
         })
+        console.log(wantT)
+
+
         function get() {
             wantT.wantTo(Infinity)
 
         }
+        function conso() {
+            console.log('到达')
+        }
         function to() {
-            wantT.wantTo(2)
+            wantT.wantTo(2,conso)
 
         }
         function tos() {
-            console.log( wantT.elOrwind() )
+            console.log( wantT.getNewTop() )
 
         }
+        function pre() {
+            // console.log( wantT.getNewTop() )
+            wantT.wantToback()
+
+
+        }
+        
 
     </script>
 </body>

@@ -19,26 +19,11 @@ class betterScroll {
         this.pre = [];      //上一次滚动位置
 
     }
-    wantTo(wantTop) {
-        if (!this.swichs) return
-        this.swichs = false;
-        if (wantTop === 'top') { this.toTop(0); this.pre.push(0); }
-        else if (wantTop === 'bottom') { this.toTop(Infinity); this.pre.push(Infinity); }
-        else { this.toTop(wantTop); this.pre.push(wantTop) }
-    }
-    //返回到上一次滚动位置
-    wantToback() {
-        if (this.pre.length === 0) return
-        let i = this.pre.pop()
-        this.wantTo(i)
-    }
-    wantToNew() {
-        this.wantTo(this.getNewTop())
-    }
     //移动功能函数
-    goTop(top) {
+    goTop(top,callBack) {
         if (this.demo === this.elOrwind()) {
             //控制随意输入 超出范围内部
+            callBack ? callBack() : ''
             this.clear()
             return
         }
@@ -47,7 +32,7 @@ class betterScroll {
         this.el.scrollTo(0, top)
     }
     //去相应位置
-    toTop(wantTop) {
+    toTop(wantTop, callBack) {
         wantTop = wantTop || 0
         let i = 0;
         /**
@@ -61,20 +46,24 @@ class betterScroll {
         if (Math.abs(wantTop - nowTops) <= 20) {
             this.goTop(wantTop)
             this.swichs = true;
+            callBack ? callBack() : ''
             return
         }
         //向下
         if (wantTop > nowTops) {
+            console.log('55555555555')
             //增加或者减少20的原因: 使最后一帧 精确到想去的位置
-            wantTop -= 20
+            wantTop = wantTop - 20
             window.timers = setInterval(() => {
                 nowTops += i > 19 ? i : ++i;
                 if (wantTop <= nowTops) {
                     this.clear()
                     this.goTop(wantTop + 20)
+                    callBack ? callBack() : '';
                     return
                 }
-                this.goTop(nowTops);
+                this.goTop(nowTops,callBack);
+
             }, this.timer)
         }
         //向上
@@ -87,28 +76,14 @@ class betterScroll {
                 if (wantTop >= nowTops) {
                     this.clear()
                     this.goTop(wantTop - 20)
+                    callBack ? callBack() : ''
                     return
                 }
                 this.goTop(nowTops);
             }, this.timer)
         }
-        else { this.swichs = true; console.log('相等') }
+        else { this.swichs = true; callBack ? callBack() : '' }
     }
-    //测试scrool的高度
-    getScroll() {
-        this.el.addEventListener('scroll', () => { this.getHeight() }, false)
-    }
-    //读取测试高度
-    getHeight() {
-        return this.elOrwind()
-        // console.log(this.elOrwind())
-    }
-    //读取实例时的高度
-    getNewTop() {
-        return this.top
-        // console.log(this.top)
-    }
-    //获取节点或window对象当前scroll高度
     elOrwind() {
         return this.el === window ?
             document.body.scrollTop || document.documentElement.scrollTop :
@@ -120,5 +95,51 @@ class betterScroll {
         this.demo = null;
         clearInterval(window.timers);
         window.timers = null;
+    }
+}
+
+
+
+class wantScroll extends betterScroll {
+    constructor(el, obj) {
+        super(el, obj)
+    }
+    //想去的位置
+    wantTo(wantTop, callBack) {
+        if (!this.swichs) return
+        this.swichs = false;
+        if (wantTop === 'top') { this.toTop(0, callBack); this.pre.push(this.getHeight()); }
+        else if (wantTop === 'bottom') { this.toTop(Infinity, callBack); this.pre.push(this.getHeight()); }
+        else { this.toTop(wantTop, callBack); this.pre.push(this.getHeight()) }
+    }
+    //读取实例时的高度
+    getNewTop() {
+        return this.top
+    }
+    //读取当前高度
+    getHeight() {
+        return this.elOrwind()
+    }
+    //滚动时 测试scrool的高度
+    getScroll() {
+        this.el.addEventListener('scroll', () => { this.getHeight() }, false)
+    }
+    //返回到上一次历史滚动位置
+    wantToback() {
+        // console.log(this.pre)
+        if (this.pre.length === 0) return
+        console.log(this.pre)
+        let ice = this.pre.pop()
+        console.log(this.pre)
+
+        this.wantTo(ice)
+    }
+    //返回实例时的位置
+    wantToNew() {
+        this.wantTo(this.getNewTop())
+    }
+    //清空历史记录
+    clearHistory() {
+        this.pre.length = 0;
     }
 }
