@@ -51,11 +51,11 @@ class betterScroll {
         }
         //向下
         if (wantTop > nowTops) {
-            console.log('55555555555')
             //增加或者减少20的原因: 使最后一帧 精确到想去的位置
             wantTop = wantTop - 20
             window.timers = setInterval(() => {
                 nowTops += i > 19 ? i : ++i;
+                console.log(i)
                 if (wantTop <= nowTops) {
                     this.clear()
                     this.goTop(wantTop + 20)
