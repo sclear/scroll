@@ -55,7 +55,7 @@ class betterScroll {
             wantTop = wantTop - 20
             window.timers = setInterval(() => {
                 nowTops += i > 19 ? i : ++i;
-                console.log(i)
+                // console.log(i)
                 if (wantTop <= nowTops) {
                     this.clear()
                     this.goTop(wantTop + 20)
@@ -128,9 +128,9 @@ class wantScroll extends betterScroll {
     wantToback() {
         // console.log(this.pre)
         if (this.pre.length === 0) return
-        console.log(this.pre)
+        // console.log(this.pre)
         let ice = this.pre.pop()
-        console.log(this.pre)
+        // console.log(this.pre)
 
         this.wantTo(ice)
     }
@@ -143,3 +143,6 @@ class wantScroll extends betterScroll {
         this.pre.length = 0;
     }
 }
+
+
+// export default wantScroll

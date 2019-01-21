@@ -1,0 +1,31 @@
+{
+  "name": "scoll",
+  "version": "1.0.0",
+  "description": "scroll to any",
+  "main": "scroll.js",
+  "private": false,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sclear/scroll.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sclear/scroll/issues"
+  },
+  "homepage": "https://github.com/sclear/scroll#readme",
+  "dependencies": {
+    "@babel/core": "^7.2.2",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-remove-strict-mode": "0.0.2",
+    "gulp": "^4.0.0",
+    "gulp-uglify": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "gulp-babel": "^7.0.1"
+  }
+}
