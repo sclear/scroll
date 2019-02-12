@@ -23,19 +23,19 @@ let wantscroll = new wantScroll(
   - wantTo(100,fn)    默认回到顶部
 
 + 上一次记录数组(Array)
-- pre
+  - pre
 
 + 返回到上一次滚动位置
-- wantToback
+  - wantToback
 
 + 清空历史记录
-- clearHistory
+  - clearHistory
 
 + 读取 记忆 实例时高度
-- getNewTop
+  - getNewTop
 
 + 回到实例时位置
-- wantToNew
+  - wantToNew
 
 
 
