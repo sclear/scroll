@@ -1,8 +1,8 @@
 {
-  "name": "scoll",
+  "name": "wantscroll",
   "version": "1.0.0",
   "description": "scroll to any",
-  "main": "scroll.js",
+  "main": "dist/scroll.js",
   "private": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/sclear/scroll.git"
   },
-  "author": "",
+  "author": "yq <1392227049@qq.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/sclear/scroll/issues"
